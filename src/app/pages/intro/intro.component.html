@@ -1,0 +1,22 @@
+<header class="p-6 bg-red-50 rounded-xl">
+  <h1 class="text-3xl">Let's learn Angular</h1>
+</header>
+
+<section class="prose my-6">
+  <h2 class="not-prose font-bold">Topics</h2>
+  <ul>
+    <li *ngFor="let link of links"><a [routerLink]="link.path" [fragment]="link.fragment">{{ link.label }}</a></li>
+  </ul>
+</section>
+
+
+<section class="prose" id="the-cli">
+  <h3>Angular CLI</h3>
+  <p>To use the CLI, you need it installed on your machine with the command <code>npm i -g @angular/cli</code></p>
+  <p>After that you should have the <code>ng</code> command in your environment</p>
+
+  <h4>Create components with the CLI</h4>
+  <p>To create a component, type <code>ng generate component path/from/src/app/component-name</code></p>
+
+  <p>For more information on using the CLI refer to <a href="https://angular.io/cli">the official documentation</a></p>
+</section>

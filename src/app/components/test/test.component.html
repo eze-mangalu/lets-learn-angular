@@ -1,0 +1,12 @@
+<article class="not-prose p-2 border rounded-md flex flex-col gap-4">
+    <p (click)="handleClick()" class="text-3xl">{{ title }}
+    <ng-container *ngIf="counter">
+        &#8212;
+        <span>{{ counter }}</span>
+    </ng-container>
+    </p>
+        <div *ngIf="counter" class="flex gap-4">
+            <button (click)="updateCounter()" class="button">Update</button>
+            <button (click)="reset()" class="button-secondary">Reset</button>
+        </div>
+</article>

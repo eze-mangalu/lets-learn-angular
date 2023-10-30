@@ -1,0 +1,45 @@
+<div class="prose">
+    <h1>Forms</h1>
+
+    <p>Angular supports two methods for managing forms;</p>
+    <ul>
+        <li>Template-driven forms</li>
+        <li>Reactive forms</li>
+    </ul>
+    
+    <article>
+        <h2>Template-driven forms</h2>
+        <p>Relies on directives in the template to create and manipulate the underlying object model.</p>
+        <p>They don't scale well and are best suited for simple forms. i.e. login, newsletter subscriptions etc.</p>
+    
+        <section>
+            <h3>Setup form model</h3>
+            <p>Template-driven forms use <code>NgModel</code> directives to handle the form model.</p>
+            <pre>{{templateDrivenModel}}</pre>
+        </section>
+
+        <section>
+            <h3>Validation</h3>
+            <p>Tied to template directives, and must provide custom validator directives that wrap validation functions.</p>
+            <pre>{{templateDrivenValidation}}</pre>
+            <p>For details on creating <code>customValidatorDirective</code> refer to the <a href="https://angular.io/guide/form-validation#adding-custom-validators-to-template-driven-forms">official documentation</a></p>
+        </section>
+    </article>
+
+    <article>
+        <h2>Reactive forms</h2>
+        <p>Provide direct, explicit access to the underlying form's object model</p>
+        
+        <section>
+            <h3>Setup form model</h3>
+            <p>You can define the form model in the component class using <code>FormControl</code> directive.</p>
+            <pre>{{reactiveModel}}</pre>
+        </section>
+
+        <section>
+            <h3>Validation</h3>
+            <p>Define custom validators as functions that receive a control to validate</p>
+            <pre>{{reactiveValidation}}</pre>
+        </section>
+    </article>
+</div>
