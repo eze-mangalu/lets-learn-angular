@@ -29,6 +29,14 @@ const routes: Route[] = [
       import('./pages/routes/routes.component').then((m) => m.RoutesComponent),
   },
   {
+    path: 'services',
+    title: 'Services',
+    loadComponent: () =>
+      import('./pages/services/services.component').then(
+        (m) => m.ServicesComponent,
+      ),
+  },
+  {
     path: '**',
     title: '404: Not found',
     component: NotFoundComponent,

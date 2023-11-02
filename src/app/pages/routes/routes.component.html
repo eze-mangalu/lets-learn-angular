@@ -1,41 +1,39 @@
-<div class="prose">
-    <h1>Routing</h1>
-    <p>We use the Angular <code>Router</code> to manage navigation between views in our SPA</p>
-    <p>The router enables navigation by interpreting a browser URL as an instruction to change the view.</p>
+<h1>Routing</h1>
+<p>We use the Angular <code>Router</code> to manage navigation between views in our SPA</p>
+<p>The router enables navigation by interpreting a browser URL as an instruction to change the view.</p>
 
-    <article>
-        <h2>Defining routes</h2>
-        <p>Routes can be defined in a routing module using <code>RouterModule</code></p>
-        <p>In the routing module we will define our routes. After that we can import the routing module into our application module.</p>
-        <pre>{{routingModule}}</pre>
+<article>
+    <h2>Defining routes</h2>
+    <p>Routes can be defined in a routing module using <code>RouterModule</code></p>
+    <p>In the routing module we will define our routes. After that we can import the routing module into our application module.</p>
+    <pre>{{routingModule}}</pre>
 
-        <p>We can use <code>**</code> wildcard to match undefined routes. This allows use to display things like a "Page not found" message.</p>
-        <p>The order of routes is important because the Router uses a first-match wins strategy when matching routes.</p>
-    </article>
+    <p>We can use <code>**</code> wildcard to match undefined routes. This allows use to display things like a "Page not found" message.</p>
+    <p>The order of routes is important because the Router uses a first-match wins strategy when matching routes.</p>
+</article>
 
-    <article>
-        <h2>Managing route access</h2>
-        <p>We can control access to routes using route guards. These are functions that return true or false to allow or prevent navigation to a route based on a condition</p>
+<article>
+    <h2>Managing route access</h2>
+    <p>We can control access to routes using route guards. These are functions that return true or false to allow or prevent navigation to a route based on a condition</p>
 
-        <p>Angular provides the following route guards</p>
-        <ul>
-            <li>CanActivate &#8212; navigation to a route</li>
-            <li>CanActivateChild &#8212; navigation to a child route</li>
-            <li>CanDeactivate &#8212; navigation away from the current route</li>
-            <li>CanMatch &#8212; whether a Route should be used at all, even if the path matches the URL segment</li>
-            <li>resolve &#8212; perform route data retrieval before route activation</li>
-        </ul>
+    <p>Angular provides the following route guards</p>
+    <ul>
+        <li>CanActivate &#8212; navigation to a route</li>
+        <li>CanActivateChild &#8212; navigation to a child route</li>
+        <li>CanDeactivate &#8212; navigation away from the current route</li>
+        <li>CanMatch &#8212; whether a Route should be used at all, even if the path matches the URL segment</li>
+        <li>resolve &#8212; perform route data retrieval before route activation</li>
+    </ul>
 
-        <pre>{{routeGuards}}</pre>
+    <pre>{{routeGuards}}</pre>
 
-        <p>More on route guards can be found <a href="https://angular.io/guide/router-tutorial-toh#milestone-5-route-guards">here</a></p>
-    </article>
+    <p>More on route guards can be found <a href="https://angular.io/guide/router-tutorial-toh#milestone-5-route-guards">here</a></p>
+</article>
 
-    <article>
-        <h2>Navigation</h2>
-        <p>Use <code>routerLink</code> to allow navigation to a route. This can be used in place of an <code>href</code> tag.</p>
-        <p>When the link is clicked the router will render the component on the defined route to the nearest <code>router-outlet</code></p>
+<article>
+    <h2>Navigation</h2>
+    <p>Use <code>routerLink</code> to allow navigation to a route. This can be used in place of an <code>href</code> tag.</p>
+    <p>When the link is clicked the router will render the component on the defined route to the nearest <code>router-outlet</code></p>
 
-        <pre>{{ navigation }}</pre>
-    </article>
-</div>
+    <pre>{{ navigation }}</pre>
+</article>

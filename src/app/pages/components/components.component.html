@@ -1,179 +1,177 @@
-<div class="prose">
-    <h1>Components</h1>
+<h1>Components</h1>
 
-    <p>Components are the building blocks of your application. You will learn how to;</p>
+<p>Components are the building blocks of your application. You will learn how to;</p>
+<ul>
+    <li>Create a component script and external template.</li>
+    <li>Bind data to your component</li>
+    <li>Emit and listen to events</li>
+    <li>Add logic to template with directives</li>
+    <li>Format data with pipes</li>
+</ul>
+
+<section>
+    <h2>Creating a component in angular</h2>
+    <p>As we have previously seen on the <a routerLink="/" fragment="the-cli">introduction page</a>, we can use the Angular CLI to generate components. This is usually the best practice way of creating components.</p>
+    <p>Let's create a test component (under the <code>components</code> directory) by running <code>ng g c components/test --standalone</code></p>
+
+    <p>This will create the file <code>/src/app/components/test/test.component.ts</code></p>
+    <pre>
+        {{ testComponentScript }}
+    </pre>
+
+    <h3>External template</h3>
+    <p>You would have noticed the line with <code>templateUrl: './test.component.html',</code>, that points to an external HTML file where our template UI lives.</p>
+    <app-test></app-test>
+</section>
+
+<article>
+    <h2>Binding data to components</h2>
+    <p>Angular supports 3 types of data binding according to direction of data flow.</p>
     <ul>
-        <li>Create a component script and external template.</li>
-        <li>Bind data to your component</li>
-        <li>Emit and listen to events</li>
-        <li>Add logic to template with directives</li>
-        <li>Format data with pipes</li>
+        <li>
+            From source to view &#8212; params
+            <code>[target]="expression"</code>
+        </li>
+        <li>
+            From view to source &#8212; events
+            <code>(target)="statement"</code>
+        </li>
+        <li>
+            Two-way sequence &#8212; view to source to view
+            <code>[(target)]="expression"</code>
+        </li>
+    </ul>
+
+    <p>The target of a data binding can be a property, an event, or an attribute name. More details about binding can be found <a href="https://angular.io/guide/binding-syntax#binding-types-and-targets">here</a></p>
+
+    <section>
+        <h3>Input</h3>
+        <p>Use the <code>@Input</code> decorator in your component to mark a class field as an input property.</p>
+        <p>Let's add a <code>title</code> property to our test component</p>
+
+        <pre>
+            {{ addInputScript }}
+        </pre>
+
+        <app-test title="My title"></app-test>
+
+        <h4>Input accepts the following options;</h4>
+        <ul>
+            <li><code>alias</code> &#8212; The name of the DOM property to which the input property is bound.</li>
+            <li><code>required</code> &#8212; Whether the input is required for the directive to function.</li>
+            <li><code>transform</code> &#8212; Function with which to transform the input value before assigning it to the directive instance.</li>
+        </ul>
+    </section>
+</article>
+
+<article>
+    <h2>Emit and listen to events</h2>
+    <section>
+        <h3>Output</h3>
+        <p>Use the <code>@Output</code> decorator in your component to mark a class field as an output property.</p>
+
+        <h4>Output accepts the following options;</h4>
+        <ul>
+            <li><code>alias</code> &#8212; The name of the DOM property to which the output property is bound.</li>
+        </ul>
+
+        <p>Let's add a <code>clicked</code> event and alert when we click the component.</p>
+
+        <pre>
+            {{ withOutput }}
+        </pre>
+        <app-test title="With output" (clicked)="onClicked()"></app-test>
+    </section>
+
+    <section>
+        <h3>Two-way binding</h3>
+        <p>For two-way binding to work, the <code>@Output</code> must use an "inputChange" pattern where "input" is the name of the <code>@Input</code> property</p>
+
+        <p>Let's bind a value to our test component and emit an event when the value is updated</p>
+
+        <pre>
+            {{ twoWayBinding }}
+        </pre>
+
+        <p [class.font-bold]="isBold">From component &#8212; {{ counter }}</p>
+        <app-test title="Counter" [(counter)]="counter"></app-test>
+    </section>
+</article>
+
+<article>
+    <h2>Adding logic to template</h2>
+    <p>We can add logic to our template using directives &#8212; Angular comes with two types of directives;</p>
+
+    <ul>
+        <li>Attribute directives</li>
+        <li>Structural directives</li>
     </ul>
 
     <section>
-        <h2>Creating a component in angular</h2>
-        <p>As we have previously seen on the <a routerLink="/" fragment="the-cli">introduction page</a>, we can use the Angular CLI to generate components. This is usually the best practice way of creating components.</p>
-        <p>Let's create a test component (under the <code>components</code> directory) by running <code>ng g c components/test --standalone</code></p>
 
-        <p>This will create the file <code>/src/app/components/test/test.component.ts</code></p>
-        <pre>
-            {{ testComponentScript }}
-        </pre>
+        <h3>Attribute directives</h3>
+        <p>Allows us to change the appearance or behavior of DOM elements and Angular components</p>
+        <p>Angular provides the following built-in attribute directives;</p>
+        <ul>
+            <li>
+                NgClass &#8212; Adds and removes a set of CSS classes.
+                <pre>{{ngClassDirective}}</pre>
+            </li>
+            <li>
+                NgStyle &#8212; Adds and removes a set of HTML styles.
+                <pre>{{ngStyleDirective}}</pre>
+            </li>
+            <li>
+                NgModel &#8212; Adds two-way data binding to an HTML form element.
+                <pre>{{ngModelDirective}}</pre>
+                <div class="inline-grid gap-2">
+                    <label for="counter">Change counter value</label>
+                    <input id="counter" type="number" [(ngModel)]="counter">
+                </div>
+            </li>
+        </ul>
+    </section>
+    
+    <section>
+        <h3>Structural directives</h3>
+        <p>Shape or reshape the DOM's structure, typically by adding, removing, and manipulating the host elements to which they are attached.</p>
 
-        <h3>External template</h3>
-        <p>You would have noticed the line with <code>templateUrl: './test.component.html',</code>, that points to an external HTML file where our template UI lives.</p>
-        <app-test></app-test>
+        <p>Angular provides the following built-in structural directives;</p>
+        <ul>
+            <li>
+                NgIf &#8212; Conditionally creates or disposes of subviews from the template.
+                <pre>
+                    {{ngIfDirective}}
+                </pre>
+            </li>
+            <li>
+                NgFor &#8212; Repeat a node for each item in a list.
+                <pre>
+                    {{ngForDirective}}
+                </pre>
+            </li>
+            <li>
+                NgSwitch &#8212; Switch among alternative views.
+                <pre>{{ngSwitchDirective}}</pre>
+            </li>
+        </ul>
     </section>
 
-    <article>
-        <h2>Binding data to components</h2>
-        <p>Angular supports 3 types of data binding according to direction of data flow.</p>
-        <ul>
-            <li>
-                From source to view &#8212; params
-                <code>[target]="expression"</code>
-            </li>
-            <li>
-                From view to source &#8212; events
-                <code>(target)="statement"</code>
-            </li>
-            <li>
-                Two-way sequence &#8212; view to source to view
-                <code>[(target)]="expression"</code>
-            </li>
-        </ul>
+    <p>More details on directives can be found <a href="https://angular.io/guide/built-in-directives">here</a></p>
+</article>
 
-        <p>The target of a data binding can be a property, an event, or an attribute name. More details about binding can be found <a href="https://angular.io/guide/binding-syntax#binding-types-and-targets">here</a></p>
+<article>
+    <h2>Formatting data with pipes</h2>
+    <p>Pipes are functions that help transform data in your template</p>
+    <p>Angular comes with some built-in pipes, here are some of the popular ones;</p>
+    <ul>
+        <li>DatePipe &#8212; Formats a date value according to locale rules</li>
+        <li>UpperCasePipe &#8212; Transforms text to uppercase</li>
+        <li>LowerCasePipe &#8212; Transforms text to lowercase</li>
+        <li>CurrencyPipe &#8212; Transforms a number to a currency string, formatted according to locale rules</li>
+        <li>DecimalPipe &#8212; Transforms a number into a string with a decimal point, formatted according to locale rules</li>
+        <li>PercentPipe &#8212; Transforms a number to a percentage string, formatted according to locale rules</li>
+    </ul>
 
-        <section>
-            <h3>Input</h3>
-            <p>Use the <code>@Input</code> decorator in your component to mark a class field as an input property.</p>
-            <p>Let's add a <code>title</code> property to our test component</p>
-
-            <pre>
-                {{ addInputScript }}
-            </pre>
-
-            <app-test title="My title"></app-test>
-
-            <h4>Input accepts the following options;</h4>
-            <ul>
-                <li><code>alias</code> &#8212; The name of the DOM property to which the input property is bound.</li>
-                <li><code>required</code> &#8212; Whether the input is required for the directive to function.</li>
-                <li><code>transform</code> &#8212; Function with which to transform the input value before assigning it to the directive instance.</li>
-            </ul>
-        </section>
-    </article>
-
-    <article>
-        <h2>Emit and listen to events</h2>
-        <section>
-            <h3>Output</h3>
-            <p>Use the <code>@Output</code> decorator in your component to mark a class field as an output property.</p>
-
-            <h4>Output accepts the following options;</h4>
-            <ul>
-                <li><code>alias</code> &#8212; The name of the DOM property to which the output property is bound.</li>
-            </ul>
-
-            <p>Let's add a <code>clicked</code> event and alert when we click the component.</p>
-
-            <pre>
-                {{ withOutput }}
-            </pre>
-            <app-test title="With output" (clicked)="onClicked()"></app-test>
-        </section>
-
-        <section>
-            <h3>Two-way binding</h3>
-            <p>For two-way binding to work, the <code>@Output</code> must use an "inputChange" pattern where "input" is the name of the <code>@Input</code> property</p>
-
-            <p>Let's bind a value to our test component and emit an event when the value is updated</p>
-
-            <pre>
-                {{ twoWayBinding }}
-            </pre>
-
-            <p [class.font-bold]="isBold">From component &#8212; {{ counter }}</p>
-            <app-test title="Counter" [(counter)]="counter"></app-test>
-        </section>
-    </article>
-
-    <article>
-        <h2>Adding logic to template</h2>
-        <p>We can add logic to our template using directives &#8212; Angular comes with two types of directives;</p>
-
-        <ul>
-            <li>Attribute directives</li>
-            <li>Structural directives</li>
-        </ul>
-
-        <section>
-
-            <h3>Attribute directives</h3>
-            <p>Allows us to change the appearance or behavior of DOM elements and Angular components</p>
-            <p>Angular provides the following built-in attribute directives;</p>
-            <ul>
-                <li>
-                    NgClass &#8212; Adds and removes a set of CSS classes.
-                    <pre>{{ngClassDirective}}</pre>
-                </li>
-                <li>
-                    NgStyle &#8212; Adds and removes a set of HTML styles.
-                    <pre>{{ngStyleDirective}}</pre>
-                </li>
-                <li>
-                    NgModel &#8212; Adds two-way data binding to an HTML form element.
-                    <pre>{{ngModelDirective}}</pre>
-                    <div class="inline-grid gap-2">
-                        <label for="counter">Change counter value</label>
-                        <input id="counter" type="number" [(ngModel)]="counter">
-                    </div>
-                </li>
-            </ul>
-        </section>
-        
-        <section>
-            <h3>Structural directives</h3>
-            <p>Shape or reshape the DOM's structure, typically by adding, removing, and manipulating the host elements to which they are attached.</p>
-
-            <p>Angular provides the following built-in structural directives;</p>
-            <ul>
-                <li>
-                    NgIf &#8212; Conditionally creates or disposes of subviews from the template.
-                    <pre>
-                        {{ngIfDirective}}
-                    </pre>
-                </li>
-                <li>
-                    NgFor &#8212; Repeat a node for each item in a list.
-                    <pre>
-                        {{ngForDirective}}
-                    </pre>
-                </li>
-                <li>
-                    NgSwitch &#8212; Switch among alternative views.
-                    <pre>{{ngSwitchDirective}}</pre>
-                </li>
-            </ul>
-        </section>
-
-        <p>More details on directives can be found <a href="https://angular.io/guide/built-in-directives">here</a></p>
-    </article>
-
-    <article>
-        <h2>Formatting data with pipes</h2>
-        <p>Pipes are functions that help transform data in your template</p>
-        <p>Angular comes with some built-in pipes, here are some of the popular ones;</p>
-        <ul>
-            <li>DatePipe &#8212; Formats a date value according to locale rules</li>
-            <li>UpperCasePipe &#8212; Transforms text to uppercase</li>
-            <li>LowerCasePipe &#8212; Transforms text to lowercase</li>
-            <li>CurrencyPipe &#8212; Transforms a number to a currency string, formatted according to locale rules</li>
-            <li>DecimalPipe &#8212; Transforms a number into a string with a decimal point, formatted according to locale rules</li>
-            <li>PercentPipe &#8212; Transforms a number to a percentage string, formatted according to locale rules</li>
-        </ul>
-
-        <p>More details about pipes can be found <a href="https://angular.io/api/common#pipes">here</a></p>
-    </article>
-</div>
+    <p>More details about pipes can be found <a href="https://angular.io/api/common#pipes">here</a></p>
+</article>
