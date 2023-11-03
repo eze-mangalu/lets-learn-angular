@@ -14,10 +14,35 @@ export class ServicesComponent {
     @Injectable({
       providedIn: "root"
     })
-    export class UsersService {
+    export class UserService {
       constructor(private http: HttpClient) {}
       getUsers() {
         return http.get('/users/endpoint');
+      }
+    }
+  `;
+  providingService = `
+    // In component
+    @Component({
+      standalone: true,
+      ...
+      providers: [UserService]
+    })
+
+    // In module
+    @NgModule({
+      ...
+      providers: [UserService]
+    })
+  `;
+  usingService = `
+    import { UserService } from "./services/user.service"
+    ...
+    class MyComponents {
+      constructor(private users: UserService) {}
+
+      getUsers() {
+        this.users.getUsers().subscribe(...)
       }
     }
   `;
