@@ -6,9 +6,19 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './services.component.html',
-  styles: [
-  ]
 })
 export class ServicesComponent {
-
+  serviceExample = `
+    import { Injectable } from "@angular/core";
+    import { HttpClient } from "@angular/common/http";
+    @Injectable({
+      providedIn: "root"
+    })
+    export class UsersService {
+      constructor(private http: HttpClient) {}
+      getUsers() {
+        return http.get('/users/endpoint');
+      }
+    }
+  `;
 }
